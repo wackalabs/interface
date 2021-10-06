@@ -48,6 +48,18 @@ export const L2_CHAIN_IDS = [
 
 export type SupportedL2ChainId = typeof L2_CHAIN_IDS[number]
 
+export const TESTNET_CHAIN_IDS = [
+  SupportedChainId.ROPSTEN,
+  SupportedChainId.RINKEBY,
+  SupportedChainId.GOERLI,
+  SupportedChainId.KOVAN,
+
+  SupportedChainId.ARBITRUM_RINKEBY,
+  SupportedChainId.OPTIMISTIC_KOVAN,
+] as const
+
+export type TestnetChainId = typeof TESTNET_CHAIN_IDS[number]
+
 export interface L1ChainInfo {
   readonly blockWaitMsBeforeWarning?: number
   readonly docs: string
