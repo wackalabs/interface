@@ -288,10 +288,11 @@ export default function Header() {
             pathname.startsWith('/add') ||
             pathname.startsWith('/remove') ||
             pathname.startsWith('/increase') ||
-            pathname.startsWith('/find')
+            pathname.startsWith('/find') ||
+            pathname.startsWith('/pool/edit')
           }
         >
-          <Trans>Profile</Trans>
+          <Trans>Account</Trans>
         </StyledNavLink>
         {(!chainId || chainId === SupportedChainId.MAINNET) && (
           <StyledNavLink id={`vote-nav-link`} to={'/vote'}>

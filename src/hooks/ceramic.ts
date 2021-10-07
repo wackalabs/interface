@@ -72,10 +72,24 @@ export function useCeramic() {
   }, [chainId, account])
 
   return {
-    authenticated: ceramicAuthenticated,
+    authenticated: window.ceramic || ceramicAuthenticated,
     ceramic: window.ceramic,
     did: window.did,
     idx: window.idx,
     authenticate: ceramicAuthenticate,
   }
+}
+
+export async function getDidFromAddress(address: string): Promise<string | null> {
+  if (!window.ceramic) return null
+  const accountLink = await Caip10Link.fromAccount(
+    window.ceramic,
+    address,
+  )
+  const linkedDid = accountLink.did
+  return linkedDid && isDidFormat(linkedDid) ? linkedDid : null
+}
+
+export function isDidFormat(value: string): boolean {
+  return value.startsWith('did:3:')
 }

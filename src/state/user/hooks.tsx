@@ -16,6 +16,7 @@ import { AppState } from '../index'
 import {
   addSerializedPair,
   addSerializedToken,
+  IDXProfile,
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
@@ -27,6 +28,7 @@ import {
   updateUserDeadline,
   updateUserExpertMode,
   updateUserLocale,
+  updateUserProfile,
   updateUserSlippageTolerance,
 } from './actions'
 
@@ -71,6 +73,24 @@ export function useDarkModeManager(): [boolean, () => void] {
   }, [darkMode, dispatch])
 
   return [darkMode, toggleSetDarkMode]
+}
+
+export function useUserProfile(): IDXProfile {
+  return useAppSelector((state) => state.user.profile)
+}
+
+export function useUserProfileManager(): [IDXProfile | null, (newProfile: IDXProfile) => void] {
+  const dispatch = useAppDispatch()
+  const profile = useUserProfile()
+
+  const setProfile = useCallback(
+    (profile: IDXProfile) => {
+      dispatch(updateUserProfile({ profile }))
+    },
+    [dispatch]
+  )
+
+  return [profile, setProfile]
 }
 
 export function useUserLocale(): SupportedLocale | null {

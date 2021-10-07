@@ -1,20 +1,37 @@
-import React, { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 import styled from 'styled-components/macro'
 
 const Input = styled.input<{ error?: boolean; fontSize?: string }>`
-  font-size: ${({ fontSize }) => fontSize || '1.25rem'};
+  position: relative;
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+  background: none;
+  border-radius: 20px;
+  color: ${({ theme }) => theme.text1};
+
+  font-size: ${({ fontSize }) => fontSize || '18px'};
   outline: none;
   border: none;
   flex: 1 1 auto;
-  width: 0;
-  background-color: ${({ theme }) => theme.bg1};
-  transition: color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')};
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.text1)};
+  
+  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.bg3};
+  
+  ::placeholder {
+    color: ${({ theme }) => theme.text3};
+  }
+  transition: border 100ms;
+  :focus {
+    border: 1px solid ${({ theme }) => theme.primary1};
+    outline: none;
+  }
+  
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 500;
-  width: 100%;
-  padding: 0px;
+  
   -webkit-appearance: textfield;
 
   ::-webkit-search-decoration {
@@ -25,28 +42,56 @@ const Input = styled.input<{ error?: boolean; fontSize?: string }>`
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+`
+
+export const SearchInput = styled.input`
+  position: relative;
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  color: ${({ theme }) => theme.text1};
+  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.bg3};
+  -webkit-appearance: none;
+
+  font-size: 18px;
 
   ::placeholder {
-    color: ${({ theme }) => theme.text4};
+    color: ${({ theme }) => theme.text3};
+  }
+  transition: border 100ms;
+  :focus {
+    border: 1px solid ${({ theme }) => theme.primary1};
+    outline: none;
   }
 `
 
 const TextAreaInput = styled.textarea<{ error?: boolean; fontSize?: string }>`
-  font-size: ${({ fontSize }) => fontSize || '1.25rem'};
+  font-size: ${({ fontSize }) => fontSize || '18px'};
+  position: relative;
   outline: none;
   border: none;
   flex: 1 1 auto;
-  width: 0;
   resize: none;
-  background-color: ${({ theme }) => theme.bg1};
-  transition: color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')};
-  color: ${({ error, theme }) => (error ? theme.red1 : theme.text1)};
+  background: none;
+  display: flex;
+
+  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.bg3};
+  outline: none;
+  padding: 16px;
+  border-radius: 20px;
+  color: ${({ theme }) => theme.text1};
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 500;
   width: 100%;
   line-height: 1.2;
-  padding: 0px;
   -webkit-appearance: textfield;
 
   ::-webkit-search-decoration {
@@ -59,7 +104,12 @@ const TextAreaInput = styled.textarea<{ error?: boolean; fontSize?: string }>`
   }
 
   ::placeholder {
-    color: ${({ theme }) => theme.text4};
+    color: ${({ theme }) => theme.text3};
+  }
+  transition: border 100ms;
+  :focus {
+    border: 1px solid ${({ theme }) => theme.primary1};
+    outline: none;
   }
 `
 

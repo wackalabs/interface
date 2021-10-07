@@ -6,6 +6,7 @@ import { updateVersion } from '../global/actions'
 import {
   addSerializedPair,
   addSerializedToken,
+  IDXProfile,
   removeSerializedPair,
   removeSerializedToken,
   SerializedPair,
@@ -19,6 +20,7 @@ import {
   updateUserDeadline,
   updateUserExpertMode,
   updateUserLocale,
+  updateUserProfile,
   updateUserSlippageTolerance,
 } from './actions'
 
@@ -65,6 +67,8 @@ export interface UserState {
 
   timestamp: number
   URLWarningVisible: boolean
+
+  profile: IDXProfile
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -87,6 +91,7 @@ export const initialState: UserState = {
   pairs: {},
   timestamp: currentTimestamp(),
   URLWarningVisible: true,
+  profile: {},
 }
 
 export default createReducer(initialState, (builder) =>
@@ -193,6 +198,10 @@ export default createReducer(initialState, (builder) =>
         delete state.pairs[chainId][pairKey(tokenAAddress, tokenBAddress)]
         delete state.pairs[chainId][pairKey(tokenBAddress, tokenAAddress)]
       }
+      state.timestamp = currentTimestamp()
+    })
+    .addCase(updateUserProfile, (state, action) => {
+      state.profile = action.payload.profile
       state.timestamp = currentTimestamp()
     })
 )
