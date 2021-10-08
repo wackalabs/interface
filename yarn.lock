@@ -1839,6 +1839,12 @@
     ts-node "^9"
     tslib "^2"
 
+"@enepti/core@enepti/core":
+  version "1.0.0"
+  resolved "https://codeload.github.com/enepti/core/tar.gz/97994641cb1588f5920357a1e8c70d7dcb28d4a4"
+  dependencies:
+    "@openzeppelin/contracts" "^4.1.0"
+
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
@@ -3083,6 +3089,11 @@
   version "3.4.1-solc-0.7-2"
   resolved "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-3.4.1-solc-0.7-2.tgz"
   integrity sha512-tAG9LWg8+M2CMu7hIsqHPaTyG4uDzjr6mhvH96LvOpLZZj6tgzTluBt+LsCf1/QaYrlis6pITvpIaIhE+iZB+Q==
+
+"@openzeppelin/contracts@^4.1.0":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.3.2.tgz#ff80affd6d352dbe1bbc5b4e1833c41afd6283b6"
+  integrity sha512-AybF1cesONZStg5kWf6ao9OlqTZuPqddvprc0ky7lrUVOjXeKpmQ2Y9FK+6ygxasb+4aic4O5pneFBfwVsRRRg==
 
 "@overnightjs/logger@^1.2.0":
   version "1.2.1"
