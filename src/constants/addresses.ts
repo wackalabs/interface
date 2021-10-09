@@ -83,3 +83,59 @@ export const V3_MIGRATOR_ADDRESSES: AddressMap = constructSameAddressMap('0xA564
   SupportedChainId.ARBITRUM_ONE,
   SupportedChainId.ARBITRUM_RINKEBY,
 ])
+
+export const ENEPTI_ACCOUNT_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_EneptiAccount || '0x5CB12Ced56Cf6c1D262A3d39F0b2bEB7D25D4554',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_EneptiAccount || '0x5CB12Ced56Cf6c1D262A3d39F0b2bEB7D25D4554',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_EneptiAccount || '0x5CB12Ced56Cf6c1D262A3d39F0b2bEB7D25D4554',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_EneptiAccount || '0x5CB12Ced56Cf6c1D262A3d39F0b2bEB7D25D4554',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_EneptiAccount || '0x5CB12Ced56Cf6c1D262A3d39F0b2bEB7D25D4554',
+}
+
+export const ENEPTI_TOKEN_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_EneptiToken || '0x88dedcD77a53e8BEC9b67Bb028c5A6AB6b3102C7',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_EneptiToken || '0x88dedcD77a53e8BEC9b67Bb028c5A6AB6b3102C7',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_EneptiToken || '0x88dedcD77a53e8BEC9b67Bb028c5A6AB6b3102C7',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_EneptiToken || '0x88dedcD77a53e8BEC9b67Bb028c5A6AB6b3102C7',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_EneptiToken || '0x88dedcD77a53e8BEC9b67Bb028c5A6AB6b3102C7',
+}
+
+export const ROOM_BASE_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_RoomBase || '0xC44eA6932e753520c94A4755d78E8F5f52B0e255',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_RoomBase || '0xC44eA6932e753520c94A4755d78E8F5f52B0e255',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_RoomBase || '0xC44eA6932e753520c94A4755d78E8F5f52B0e255',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_RoomBase || '0xC44eA6932e753520c94A4755d78E8F5f52B0e255',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_RoomBase || '0xC44eA6932e753520c94A4755d78E8F5f52B0e255',
+}
+
+export const ENEPTI_ACCOUNT_REGISTRY_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_AccountRegistry || '0xf5A3Bfe6E249082d533940F761ABC8a61F7C5640',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_AccountRegistry || '0xf5A3Bfe6E249082d533940F761ABC8a61F7C5640',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_AccountRegistry || '0xf5A3Bfe6E249082d533940F761ABC8a61F7C5640',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_AccountRegistry || '0xf5A3Bfe6E249082d533940F761ABC8a61F7C5640',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_AccountRegistry || '0xf5A3Bfe6E249082d533940F761ABC8a61F7C5640',
+}
+
+export const LMN_TOKEN_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_LMNToken || '0x8392f885Ca370d0A8a422A59295676B0DB49b498',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_LMNToken || '0x8392f885Ca370d0A8a422A59295676B0DB49b498',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_LMNToken || '0x8392f885Ca370d0A8a422A59295676B0DB49b498',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_LMNToken || '0x8392f885Ca370d0A8a422A59295676B0DB49b498',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_LMNToken || '0x8392f885Ca370d0A8a422A59295676B0DB49b498',
+}
+
+export const SOCIAL_TOKEN_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_SocialToken || '0xfC9BE3e71293c76cc243e0b66891533525FAcD3d',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_SocialToken || '0xfC9BE3e71293c76cc243e0b66891533525FAcD3d',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_SocialToken || '0xfC9BE3e71293c76cc243e0b66891533525FAcD3d',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_SocialToken || '0xfC9BE3e71293c76cc243e0b66891533525FAcD3d',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_SocialToken || '0xfC9BE3e71293c76cc243e0b66891533525FAcD3d',
+}
+
+export const BANCOR_FORMULA_ADDRESS: AddressMap = {
+  [SupportedChainId.MAINNET]: process.env.REACT_APP_BancorFormula || '0xba5Eeb482518587656aaB2e71A8b5FBB5790FDA4',
+  [SupportedChainId.ROPSTEN]: process.env.REACT_APP_BancorFormula || '0xba5Eeb482518587656aaB2e71A8b5FBB5790FDA4',
+  [SupportedChainId.GOERLI]: process.env.REACT_APP_BancorFormula || '0xba5Eeb482518587656aaB2e71A8b5FBB5790FDA4',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_BancorFormula || '0xba5Eeb482518587656aaB2e71A8b5FBB5790FDA4',
+  [SupportedChainId.RINKEBY]: process.env.REACT_APP_BancorFormula || '0xba5Eeb482518587656aaB2e71A8b5FBB5790FDA4',
+}

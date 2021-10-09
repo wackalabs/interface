@@ -1839,9 +1839,10 @@
     ts-node "^9"
     tslib "^2"
 
-"@enepti/core@enepti/core":
+"@enepti/core@1.0.0":
   version "1.0.0"
-  resolved "https://codeload.github.com/enepti/core/tar.gz/97994641cb1588f5920357a1e8c70d7dcb28d4a4"
+  resolved "https://registry.yarnpkg.com/@enepti/core/-/core-1.0.0.tgz#a3d90d9aa7517f88eea22fa494b51d80a9024c2e"
+  integrity sha512-QlFICPdyPsY/u8QKseSl9EThy4s8JOabAGxC0ciErr03DSYIVKjFxGKmSE+KkxppmBOJxZMOzM7Y8zvBD0X5Ww==
   dependencies:
     "@openzeppelin/contracts" "^4.1.0"
 

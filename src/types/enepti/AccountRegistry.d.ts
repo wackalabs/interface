@@ -27,7 +27,7 @@ interface AccountRegistryInterface extends ethers.utils.Interface {
     "accountContract()": FunctionFragment;
     "accounts(address)": FunctionFragment;
     "activate(uint256)": FunctionFragment;
-    "create(uint256,uint256[])": FunctionFragment;
+    "create(uint256)": FunctionFragment;
     "deactivate(uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
@@ -62,7 +62,7 @@ interface AccountRegistryInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "create",
-    values: [BigNumberish, BigNumberish[]]
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "deactivate",
@@ -236,7 +236,6 @@ export class AccountRegistry extends BaseContract {
 
     create(
       nftId: BigNumberish,
-      _dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -318,7 +317,6 @@ export class AccountRegistry extends BaseContract {
 
   create(
     nftId: BigNumberish,
-    _dna: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -395,11 +393,7 @@ export class AccountRegistry extends BaseContract {
 
     activate(nftId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    create(
-      nftId: BigNumberish,
-      _dna: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
+    create(nftId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     deactivate(nftId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -509,7 +503,6 @@ export class AccountRegistry extends BaseContract {
 
     create(
       nftId: BigNumberish,
-      _dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -599,7 +592,6 @@ export class AccountRegistry extends BaseContract {
 
     create(
       nftId: BigNumberish,
-      _dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

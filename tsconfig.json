@@ -24,7 +24,10 @@
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "types": ["react-spring", "jest"],
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@enepti/core": ["../../core/*"],
+    }
   },
   "exclude": ["node_modules", "cypress"],
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]

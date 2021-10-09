@@ -29,15 +29,18 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "buySocialToken(uint256)": FunctionFragment;
     "creator()": FunctionFragment;
-    "dividentReceived(uint256)": FunctionFragment;
-    "dividents(uint256)": FunctionFragment;
-    "dnaSequences(uint256,uint256)": FunctionFragment;
+    "dividendReceived(uint256)": FunctionFragment;
+    "dividends(uint256)": FunctionFragment;
+    "genArtInfos(uint256)": FunctionFragment;
+    "genArtTokenURI(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getDna(uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
+    "getScript(uint256)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "isUsingIpfs(uint256)": FunctionFragment;
     "lmnToken()": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -49,10 +52,14 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
+    "toggleUseIpfs(uint256)": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
+    "updateBaseIpfsURI(string)": FunctionFragment;
+    "updateBaseURI(string)": FunctionFragment;
     "updateDna(uint256,uint256[])": FunctionFragment;
-    "withdrawDividents(uint256)": FunctionFragment;
+    "updateScript(uint256,string)": FunctionFragment;
+    "withdrawDividends(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -75,16 +82,20 @@ interface SocialTokenInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "creator", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "dividentReceived",
+    functionFragment: "dividendReceived",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "dividents",
+    functionFragment: "dividends",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "dnaSequences",
-    values: [BigNumberish, BigNumberish]
+    functionFragment: "genArtInfos",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "genArtTokenURI",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getApproved",
@@ -99,6 +110,10 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     values: [BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "getScript",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "grantRole",
     values: [BytesLike, string]
   ): string;
@@ -109,6 +124,10 @@ interface SocialTokenInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isUsingIpfs",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "lmnToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -143,6 +162,10 @@ interface SocialTokenInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "toggleUseIpfs",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "tokenURI",
     values: [BigNumberish]
   ): string;
@@ -151,11 +174,23 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "updateBaseIpfsURI",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateBaseURI",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "updateDna",
     values: [BigNumberish, BigNumberish[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawDividents",
+    functionFragment: "updateScript",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawDividends",
     values: [BigNumberish]
   ): string;
 
@@ -176,12 +211,16 @@ interface SocialTokenInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "creator", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "dividentReceived",
+    functionFragment: "dividendReceived",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "dividents", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "dividends", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "dnaSequences",
+    functionFragment: "genArtInfos",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "genArtTokenURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -193,10 +232,15 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getScript", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isUsingIpfs",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lmnToken", data: BytesLike): Result;
@@ -225,14 +269,30 @@ interface SocialTokenInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "toggleUseIpfs",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateBaseIpfsURI",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateBaseURI",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "updateDna", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawDividents",
+    functionFragment: "updateScript",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawDividends",
     data: BytesLike
   ): Result;
 
@@ -322,21 +382,31 @@ export class SocialToken extends BaseContract {
 
     creator(overrides?: CallOverrides): Promise<[string]>;
 
-    dividentReceived(
+    dividendReceived(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    dividents(
+    dividends(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    dnaSequences(
+    genArtInfos(
       arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [string, string, boolean] & {
+        script: string;
+        ipfsHash: string;
+        useIpfs: boolean;
+      }
+    >;
+
+    genArtTokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     getApproved(
       tokenId: BigNumberish,
@@ -349,6 +419,11 @@ export class SocialToken extends BaseContract {
     ): Promise<[BigNumber[]]>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<[string]>;
+
+    getScript(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     grantRole(
       role: BytesLike,
@@ -365,6 +440,11 @@ export class SocialToken extends BaseContract {
     isApprovedForAll(
       owner: string,
       operator: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    isUsingIpfs(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -423,6 +503,11 @@ export class SocialToken extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
+    toggleUseIpfs(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -435,13 +520,29 @@ export class SocialToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    updateBaseIpfsURI(
+      _baseIpfsURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    updateBaseURI(
+      _baseURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     updateDna(
       tokenId: BigNumberish,
       dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdrawDividents(
+    updateScript(
+      tokenId: BigNumberish,
+      _script: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    withdrawDividends(
       _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -468,18 +569,28 @@ export class SocialToken extends BaseContract {
 
   creator(overrides?: CallOverrides): Promise<string>;
 
-  dividentReceived(
+  dividendReceived(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  dividents(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  dividends(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-  dnaSequences(
+  genArtInfos(
     arg0: BigNumberish,
-    arg1: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<
+    [string, string, boolean] & {
+      script: string;
+      ipfsHash: string;
+      useIpfs: boolean;
+    }
+  >;
+
+  genArtTokenURI(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   getApproved(
     tokenId: BigNumberish,
@@ -492,6 +603,8 @@ export class SocialToken extends BaseContract {
   ): Promise<BigNumber[]>;
 
   getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+  getScript(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   grantRole(
     role: BytesLike,
@@ -508,6 +621,11 @@ export class SocialToken extends BaseContract {
   isApprovedForAll(
     owner: string,
     operator: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  isUsingIpfs(
+    tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -563,6 +681,11 @@ export class SocialToken extends BaseContract {
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
+  toggleUseIpfs(
+    tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   transferFrom(
@@ -572,13 +695,29 @@ export class SocialToken extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  updateBaseIpfsURI(
+    _baseIpfsURI: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  updateBaseURI(
+    _baseURI: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   updateDna(
     tokenId: BigNumberish,
     dna: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdrawDividents(
+  updateScript(
+    tokenId: BigNumberish,
+    _script: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  withdrawDividends(
     _tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -605,21 +744,31 @@ export class SocialToken extends BaseContract {
 
     creator(overrides?: CallOverrides): Promise<string>;
 
-    dividentReceived(
+    dividendReceived(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dividents(
+    dividends(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dnaSequences(
+    genArtInfos(
       arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [string, string, boolean] & {
+        script: string;
+        ipfsHash: string;
+        useIpfs: boolean;
+      }
+    >;
+
+    genArtTokenURI(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     getApproved(
       tokenId: BigNumberish,
@@ -632,6 +781,11 @@ export class SocialToken extends BaseContract {
     ): Promise<BigNumber[]>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+    getScript(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     grantRole(
       role: BytesLike,
@@ -648,6 +802,11 @@ export class SocialToken extends BaseContract {
     isApprovedForAll(
       owner: string,
       operator: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    isUsingIpfs(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -701,6 +860,11 @@ export class SocialToken extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
+    toggleUseIpfs(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     transferFrom(
@@ -710,13 +874,26 @@ export class SocialToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    updateBaseIpfsURI(
+      _baseIpfsURI: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateBaseURI(_baseURI: string, overrides?: CallOverrides): Promise<void>;
+
     updateDna(
       tokenId: BigNumberish,
       dna: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    withdrawDividents(
+    updateScript(
+      tokenId: BigNumberish,
+      _script: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    withdrawDividends(
       _tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -804,19 +981,23 @@ export class SocialToken extends BaseContract {
 
     creator(overrides?: CallOverrides): Promise<BigNumber>;
 
-    dividentReceived(
+    dividendReceived(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dividents(
+    dividends(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dnaSequences(
+    genArtInfos(
       arg0: BigNumberish,
-      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    genArtTokenURI(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -835,6 +1016,11 @@ export class SocialToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getScript(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -850,6 +1036,11 @@ export class SocialToken extends BaseContract {
     isApprovedForAll(
       owner: string,
       operator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isUsingIpfs(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -908,6 +1099,11 @@ export class SocialToken extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
+    toggleUseIpfs(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -920,13 +1116,29 @@ export class SocialToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    updateBaseIpfsURI(
+      _baseIpfsURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    updateBaseURI(
+      _baseURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     updateDna(
       tokenId: BigNumberish,
       dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    withdrawDividents(
+    updateScript(
+      tokenId: BigNumberish,
+      _script: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    withdrawDividends(
       _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -959,19 +1171,23 @@ export class SocialToken extends BaseContract {
 
     creator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    dividentReceived(
+    dividendReceived(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    dividents(
+    dividends(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    dnaSequences(
+    genArtInfos(
       arg0: BigNumberish,
-      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    genArtTokenURI(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -990,6 +1206,11 @@ export class SocialToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getScript(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     grantRole(
       role: BytesLike,
       account: string,
@@ -1005,6 +1226,11 @@ export class SocialToken extends BaseContract {
     isApprovedForAll(
       owner: string,
       operator: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isUsingIpfs(
+      tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1063,6 +1289,11 @@ export class SocialToken extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    toggleUseIpfs(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -1075,13 +1306,29 @@ export class SocialToken extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    updateBaseIpfsURI(
+      _baseIpfsURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateBaseURI(
+      _baseURI: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     updateDna(
       tokenId: BigNumberish,
       dna: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdrawDividents(
+    updateScript(
+      tokenId: BigNumberish,
+      _script: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    withdrawDividends(
       _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

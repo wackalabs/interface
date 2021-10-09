@@ -15,27 +15,43 @@ import ENS_PUBLIC_RESOLVER_ABI from 'abis/ens-public-resolver.json'
 import ENS_ABI from 'abis/ens-registrar.json'
 import ERC20_ABI from 'abis/erc20.json'
 import ERC20_BYTES32_ABI from 'abis/erc20_bytes32.json'
+import ERC721_ABI from 'abis/erc721.json'
 import GOVERNOR_BRAVO_ABI from 'abis/governor-bravo.json'
 import WETH_ABI from 'abis/weth.json'
 import {
   ARGENT_WALLET_DETECTOR_ADDRESS,
+  BANCOR_FORMULA_ADDRESS,
+  ENEPTI_ACCOUNT_ADDRESS,
+  ENEPTI_ACCOUNT_REGISTRY_ADDRESS,
+  ENEPTI_TOKEN_ADDRESS,
   ENS_REGISTRAR_ADDRESSES,
   GOVERNANCE_ALPHA_V0_ADDRESSES,
   GOVERNANCE_ALPHA_V1_ADDRESSES,
   GOVERNANCE_BRAVO_ADDRESSES,
+  LMN_TOKEN_ADDRESS,
   MERKLE_DISTRIBUTOR_ADDRESS,
   MULTICALL_ADDRESS,
   NONFUNGIBLE_POSITION_MANAGER_ADDRESSES,
   QUOTER_ADDRESSES,
+  ROOM_BASE_ADDRESS,
+  SOCIAL_TOKEN_ADDRESS,
   V2_ROUTER_ADDRESS,
   V3_MIGRATOR_ADDRESSES,
 } from 'constants/addresses'
 import { useMemo } from 'react'
+import { AccountRegistry, BancorFormula, EneptiAccount, EneptiToken, LMNToken, RoomBase, SocialToken } from 'types/enepti'
 import { NonfungiblePositionManager, Quoter, UniswapInterfaceMulticall } from 'types/v3'
 import { V3Migrator } from 'types/v3/V3Migrator'
 import { getContract } from 'utils'
 
-import { ArgentWalletDetector, EnsPublicResolver, EnsRegistrar, Erc20, Weth } from '../abis/types'
+import { abi as AccountRegistryABI } from'../../../core/artifacts/contracts/AccountRegistry.sol/AccountRegistry.json'
+import { abi as BancorFormulaABI } from'../../../core/artifacts/contracts/BancorFormula.sol/BancorFormula.json'
+import { abi as EneptiAccountABI } from'../../../core/artifacts/contracts/EneptiAccount.sol/EneptiAccount.json'
+import { abi as EneptiTokenABI } from'../../../core/artifacts/contracts/EneptiToken.sol/EneptiToken.json'
+import { abi as LMNTokenABI } from'../../../core/artifacts/contracts/LMNToken.sol/LMNToken.json'
+import { abi as RoomBaseABI } from'../../../core/artifacts/contracts/RoomBase.sol/RoomBase.json'
+import { abi as SocialTokenABI } from'../../../core/artifacts/contracts/SocialToken.sol/SocialToken.json'
+import { ArgentWalletDetector, EnsPublicResolver, EnsRegistrar, Erc20, Erc721, Weth } from '../abis/types'
 import { UNI, WETH9_EXTENDED } from '../constants/tokens'
 import { useActiveWeb3React } from './web3'
 
@@ -73,6 +89,10 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 export function useWETHContract(withSignerIfPossible?: boolean) {
   const { chainId } = useActiveWeb3React()
   return useContract<Weth>(chainId ? WETH9_EXTENDED[chainId]?.address : undefined, WETH_ABI, withSignerIfPossible)
+}
+
+export function useNFTTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean) {
+  return useContract<Erc721>(tokenAddress, ERC721_ABI, withSignerIfPossible)
 }
 
 export function useArgentWalletDetectorContract() {
@@ -138,6 +158,70 @@ export function useV3NFTPositionManagerContract(withSignerIfPossible?: boolean):
   return useContract<NonfungiblePositionManager>(
     NONFUNGIBLE_POSITION_MANAGER_ADDRESSES,
     NFTPositionManagerABI,
+    withSignerIfPossible
+  )
+}
+
+export function useEneptiAccountContract(withSignerIfPossible?: boolean): EneptiAccount | null {
+  return useContract<EneptiAccount>(
+    ENEPTI_ACCOUNT_ADDRESS,
+    EneptiAccountABI,
+    withSignerIfPossible
+  )
+}
+
+export function useEneptiTokenContract(withSignerIfPossible?: boolean): EneptiToken | null {
+  return useContract<EneptiToken>(
+    ENEPTI_TOKEN_ADDRESS,
+    EneptiTokenABI,
+    withSignerIfPossible
+  )
+}
+
+export function useEneptiAccountRegistryContract(withSignerIfPossible?: boolean): AccountRegistry | null {
+  return useContract<AccountRegistry>(
+    ENEPTI_ACCOUNT_REGISTRY_ADDRESS,
+    AccountRegistryABI,
+    withSignerIfPossible
+  )
+}
+
+export function useLMNTokenContract(withSignerIfPossible?: boolean): LMNToken | null {
+  return useContract<LMNToken>(
+    LMN_TOKEN_ADDRESS,
+    LMNTokenABI,
+    withSignerIfPossible
+  )
+}
+
+export function useAccountRegistryContract(withSignerIfPossible?: boolean): AccountRegistry | null {
+  return useContract<AccountRegistry>(
+    ENEPTI_ACCOUNT_REGISTRY_ADDRESS,
+    AccountRegistryABI,
+    withSignerIfPossible
+  )
+}
+
+export function useEneptiRoomContract(withSignerIfPossible?: boolean): RoomBase | null {
+  return useContract<RoomBase>(
+    ROOM_BASE_ADDRESS,
+    RoomBaseABI,
+    withSignerIfPossible
+  )
+}
+
+export function useSocialTokenContract(withSignerIfPossible?: boolean): SocialToken | null {
+  return useContract<SocialToken>(
+    SOCIAL_TOKEN_ADDRESS,
+    SocialTokenABI,
+    withSignerIfPossible
+  )
+}
+
+export function useBancorFormulaContract(withSignerIfPossible?: boolean): BancorFormula | null {
+  return useContract<BancorFormula>(
+    BANCOR_FORMULA_ADDRESS,
+    BancorFormulaABI,
     withSignerIfPossible
   )
 }
